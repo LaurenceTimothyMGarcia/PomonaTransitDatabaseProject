@@ -29,7 +29,8 @@ public class Main
 
     }
 
-    private static void displayAllCommands(){
+    private static void displayAllCommands()
+    {
 		System.out.println("ds:\tDisplay a Schedule");
         System.out.println("dt:\tDelete a Trip Offering");
         System.out.println("at:\tAdd a Trip Offering");
