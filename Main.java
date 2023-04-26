@@ -20,10 +20,60 @@
     // 8. Record (insert) the actual data of a given trip offering specified by its key. The actual
     // data include the attributes of the table ActualTripStopInfo.
 
+import java.sql.*;
+
 public class Main 
 {
     public static void main (String[] args)
     {
-        
+
+    }
+
+    // Display Schedule
+    public void displaySchedule()
+    {
+
+    }
+
+    // Edit Schedule
+    public void editSchedule()
+    {
+
+    }
+
+    // Display stops
+    public void displayStops()
+    {
+
+    }
+
+    // DIsplay weekly schedule of given driver
+    public void displayDriver()
+    {
+
+    }
+
+    // add driver
+    public void addDriver()
+    {
+
+    }
+
+    // Add bus
+    public void addBus()
+    {
+
+    }
+
+    // Delete bus
+    public void deleteBus()
+    {
+
+    }
+
+    // Record data from trip
+    public void insertData()
+    {
+
     }
 }
