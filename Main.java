@@ -19,3 +19,11 @@
     // 7. Delete a bus.
     // 8. Record (insert) the actual data of a given trip offering specified by its key. The actual
     // data include the attributes of the table ActualTripStopInfo.
+
+public class Main 
+{
+    public static void main (String[] args)
+    {
+        
+    }
+}
