@@ -1,5 +1,5 @@
 // Laurence Garcia
-// Sunjay
+// Sunjay 
 // CS 4350
 // Lab 4
 
@@ -27,6 +27,22 @@ public class Main
     public static void main (String[] args)
     {
 
+    }
+
+    private static void displayAllCommands(){
+		System.out.println("ds:\tDisplay a Schedule");
+        System.out.println("dt:\tDelete a Trip Offering");
+        System.out.println("at:\tAdd a Trip Offering");
+        System.out.println("cd:\tChange a Driver");
+        System.out.println("cb:\tChange a Bus");
+        System.out.println("ds:\tDisplay Trip Stops");
+        System.out.println("dw:\tDisplay Weekly Schedule for Driver");
+        System.out.println("ad:\tAdd a Driver");
+        System.out.println("ab:\tAdd a Bus");
+        System.out.println("db:\tDelete a Bus");
+        System.out.println("it:\tInsert Actual Trip Info");
+        System.out.println("h:\tDisplay all commands");
+        System.out.println("x:\tExit program");
     }
 
     // Display Schedule
