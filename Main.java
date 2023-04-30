@@ -123,7 +123,7 @@ public class Main
     }
 
     // Edit Schedule
-    private static void editSchedule()
+    private static void editSchedule(Connection connect, Statement statement)
     {
         try
         {
@@ -136,7 +136,7 @@ public class Main
     }
 
     // Display stops
-    private static void displayStops()
+    private static void displayStops(Connection connect, Statement statement)
     {
         try
         {
@@ -149,7 +149,7 @@ public class Main
     }
 
     // DIsplay weekly schedule of given driver
-    private static void displayDriver()
+    private static void displayDriver(Connection connect, Statement statement)
     {
         try
         {
@@ -162,7 +162,7 @@ public class Main
     }
 
     // add driver
-    private static void addDriver()
+    private static void addDriver(Connection connect, Statement statement)
     {
         try
         {
@@ -175,7 +175,7 @@ public class Main
     }
 
     // Add bus
-    private static void addBus()
+    private static void addBus(Connection connect, Statement statement)
     {
         try
         {
@@ -188,7 +188,7 @@ public class Main
     }
 
     // Delete bus
-    private static void deleteBus()
+    private static void deleteBus(Connection connect, Statement statement)
     {
         try
         {
@@ -201,7 +201,7 @@ public class Main
     }
 
     // Record data from trip
-    private static void insertData()
+    private static void insertData(Connection connect, Statement statement)
     {
         try
         {
