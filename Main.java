@@ -62,8 +62,10 @@ public class Main
                     case "cb":
                         break;
                     case "dts":
+                        displayStops(connect, statement);
                         break;
                     case "dw":
+                        displayDriver(connect, statement);
                         break;
                     case "ad":
                         break;
@@ -133,7 +135,7 @@ public class Main
         }
         catch(Exception e)
         {
-
+            System.out.println(e);
         }
     }
 
@@ -142,11 +144,19 @@ public class Main
     {
         try
         {
+            ResultSet result = statement.executeQuery("select * from stop");
 
+            System.out.printf("| %-11s | %-12s |\n","Stop Number", "Stop Address");
+            System.out.printf("--------------------------------%n");
+
+            while (result.next())
+            {
+                System.out.printf("| %03d | %-20s |\n", result.getInt(1), result.getString(2));
+            }
         }
         catch(Exception e)
         {
-            
+            System.out.println(e);
         }
     }
 
@@ -155,11 +165,19 @@ public class Main
     {
         try
         {
+            ResultSet result = statement.executeQuery("select * from driver");
 
+            System.out.printf("| %-11s | %-20s |\n","Driver Name", "Driver Phone Number");
+            System.out.printf("--------------------------------%n");
+
+            while (result.next())
+            {
+                System.out.printf("| %-11s | %-10s |\n", result.getString(1), result.getString(2));
+            }
         }
         catch(Exception e)
         {
-            
+            System.out.println(e);
         }
     }
 
@@ -172,7 +190,7 @@ public class Main
         }
         catch(Exception e)
         {
-            
+            System.out.println(e);
         }
     }
 
@@ -185,7 +203,7 @@ public class Main
         }
         catch(Exception e)
         {
-            
+            System.out.println(e);
         }
     }
 
@@ -198,7 +216,7 @@ public class Main
         }
         catch(Exception e)
         {
-            
+            System.out.println(e);
         }
     }
 
@@ -211,7 +229,7 @@ public class Main
         }
         catch(Exception e)
         {
-            
+            System.out.println(e);
         }
     }
 }
