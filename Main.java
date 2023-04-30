@@ -5,18 +5,18 @@
 
 // Project Details
     // Design and implement a database system of the Pomona Transit System with Database of choice and JDBC
-    // 1. Display the schedule of all trips for a given StartLocationName and Destination Name, and Date. 
+    // DONE 1. Display the schedule of all trips for a given StartLocationName and Destination Name, and Date. 
         // In addition to these attributes, the schedule includes: Scheduled StartTime, ScheduledArrivalTime , DriverID, and BusID.
     // 2. Edit the schedule i.e. edit the table of Trip Offering as follows:
         // -Delete a trip offering specified by Trip#, Date, and ScheduledStartTime;
         // -Add a set of trip offerings assuming the values of all attributes are given (the software asks if you have more trips to enter) ;
         // - Change the driver for a given Trip offering (i.e given TripNumber, Date, ScheduledStartTime);
         // - Change the bus for a given Trip offering
-    // 3. Display the stops of a given trip ( i.e. the attributes of the table TripStopInfo).
-    // 4. Display the weekly schedule of a given driver and date.
-    // 5. Add a drive.
-    // 6. Add a bus.
-    // 7. Delete a bus.
+    // DONE 3. Display the stops of a given trip ( i.e. the attributes of the table TripStopInfo).
+    // DONE 4. Display the weekly schedule of a given driver and date.
+    // DONE 5. Add a drive.
+    // DONE 6. Add a bus.
+    // DONE 7. Delete a bus.
     // 8. Record (insert) the actual data of a given trip offering specified by its key. The actual
     // data include the attributes of the table ActualTripStopInfo.
 
@@ -50,31 +50,69 @@ public class Main
 
                 switch(input)
                 {
+                    // Display Schedule
                     case "ds":
                         displaySchedule(connect, statement);
                         break;
+                    // Delete Trip offering
                     case "dt":
+                        System.out.print("Insert Trip Number to Delete: ");
+                        int tripNum = kb.nextInt();
+                        deleteTrip(connect, statement, tripNum);
                         break;
+                    // Add Trip Offering
                     case "at":
+                        addTrip(connect, statement);
                         break;
+                    // Change Driver
                     case "cd":
+                        changeDriver(connect, statement);
                         break;
+                    // Change bus
                     case "cb":
+                        changeBus(connect, statement);
                         break;
+                    // Display Trip Stops
                     case "dts":
                         displayStops(connect, statement);
                         break;
+                    // Display Weekly Scehdule for driver
                     case "dw":
                         displayDriver(connect, statement);
                         break;
+                    // Add driver
                     case "ad":
+                        System.out.print("Insert Name of Driver: ");
+                        String name = kb.nextLine();
+                        System.out.print("Insert Number of Driver: ");
+                        String num = kb.nextLine();
+                        addDriver(connect, statement, name, num);
                         break;
+                    // Add bus
                     case "ab":
+                        System.out.print("Insert BusID: ");
+                        int addBusID = kb.nextInt();
+                        kb.nextLine();
+                        System.out.print("Insert Model: ");
+                        String model = kb.nextLine();
+                        System.out.print("Insert Year: ");
+                        String year = kb.nextLine();
+                        addBus(connect, statement, addBusID, model, year);
                         break;
+                    // Delete bus
+                    case "db":
+                        System.out.print("Select Bus ID to delete: ");
+                        int delBusID = kb.nextInt();
+                        deleteBus(connect, statement, delBusID);
+                        break;
+                    // Insert actual trip info
                     case "it":
+                        insertData(connect, statement);
                         break;
+                    // Display all commands
                     case "h":
                         break;
+                    // Exit
                     case "x":
                         break;
                 }
@@ -87,6 +125,8 @@ public class Main
         {
             System.out.println(e);
         }
+
+        kb.close();
     }
 
     private static void displayAllCommands()
@@ -126,8 +166,43 @@ public class Main
         }
     }
 
-    // Edit Schedule
-    private static void editSchedule(Connection connect, Statement statement)
+    private static void deleteTrip(Connection connect, Statement statement, int tripNum)
+    {
+        try
+        {
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    private static void addTrip(Connection connect, Statement statement)
+    {
+        try
+        {
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    private static void changeDriver(Connection connect, Statement statement)
+    {
+        try
+        {
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    private static void changeBus(Connection connect, Statement statement)
     {
         try
         {
@@ -182,11 +257,12 @@ public class Main
     }
 
     // add driver
-    private static void addDriver(Connection connect, Statement statement)
+    private static void addDriver(Connection connect, Statement statement, String name, String num)
     {
         try
         {
-
+            String update = String.format("INSERT INTO driver(DriverName, DriverTelephoneNumber) VALUES ('%s', '%s')", name, num);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
@@ -195,11 +271,12 @@ public class Main
     }
 
     // Add bus
-    private static void addBus(Connection connect, Statement statement)
+    private static void addBus(Connection connect, Statement statement, int busID, String model, String year)
     {
         try
         {
-
+            String update = String.format("INSERT INTO bus(BusID, Model, Year) VALUES ('%d', '%s', '%s')", busID, model, year);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
@@ -208,11 +285,12 @@ public class Main
     }
 
     // Delete bus
-    private static void deleteBus(Connection connect, Statement statement)
+    private static void deleteBus(Connection connect, Statement statement, int busID)
     {
         try
         {
-
+            String update = String.format("DELETE FROM bus WHERE (BusID = '%d')", busID);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
