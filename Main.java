@@ -22,11 +22,37 @@
 
 import java.sql.*;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 public class Main 
 {
     public static void main (String[] args)
     {
+        String url = "jdbc:mysql://localhost:3306/pomonatransitsystem";
+        String username = "root";
+        String password = "";
 
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection connect = DriverManager.getConnection(url, username, password);
+
+            Statement statement = connect.createStatement();
+
+            ResultSet resultSet = statement.executeQuery("select * from driver");
+
+            while (resultSet.next())
+            {
+                System.out.println(resultSet.getString(1));
+            }
+
+            connect.close();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     private static void displayAllCommands()
