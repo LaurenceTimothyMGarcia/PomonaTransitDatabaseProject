@@ -111,9 +111,11 @@ public class Main
         {
             ResultSet result = statement.executeQuery("select * from tripoffering");
 
+            System.out.printf("| %-11s | %-4s | %-4s | %-4s | %-4s | %-4s |\n","Trip Number", "Date", "Start Time", "Arrival Time", "Driver", "Bus ID");
+            System.out.printf("--------------------------------%n");
             while (result.next())
             {
-                System.out.println(result.getInt(1));
+                System.out.printf("| %03d | %-10s | %-7s | %-7s | %-10s | %03d |\n", result.getInt(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getInt(6));
             }
         }
         catch(Exception e)
