@@ -21,31 +21,63 @@
     // data include the attributes of the table ActualTripStopInfo.
 
 import java.sql.*;
-
-import javax.naming.spi.DirStateFactory.Result;
+import java.util.Scanner;
 
 public class Main 
 {
     public static void main (String[] args)
     {
+        Scanner kb = new Scanner(System.in);
+
         String url = "jdbc:mysql://localhost:3306/pomonatransitsystem";
         String username = "root";
         String password = "";
 
+        String input = "";
+
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-
             Connection connect = DriverManager.getConnection(url, username, password);
-
             Statement statement = connect.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from driver");
-
-            while (resultSet.next())
+            do
             {
-                System.out.println(resultSet.getString(1));
-            }
+                System.out.println("---------------------");
+                displayAllCommands();
+                System.out.print("Select Option: ");
+                input = kb.nextLine();
+
+                switch(input)
+                {
+                    case "ds":
+                        displaySchedule(connect, statement);
+                        break;
+                    case "dt":
+                        break;
+                    case "at":
+                        break;
+                    case "cd":
+                        break;
+                    case "cb":
+                        break;
+                    case "dts":
+                        break;
+                    case "dw":
+                        break;
+                    case "ad":
+                        break;
+                    case "ab":
+                        break;
+                    case "it":
+                        break;
+                    case "h":
+                        break;
+                    case "x":
+                        break;
+                }
+
+            } while(input != "x");
 
             connect.close();
         }
@@ -57,12 +89,12 @@ public class Main
 
     private static void displayAllCommands()
     {
-		System.out.println("ds:\tDisplay a Schedule");
+        System.out.println("ds:\tDisplay a Schedule");
         System.out.println("dt:\tDelete a Trip Offering");
         System.out.println("at:\tAdd a Trip Offering");
         System.out.println("cd:\tChange a Driver");
         System.out.println("cb:\tChange a Bus");
-        System.out.println("ds:\tDisplay Trip Stops");
+        System.out.println("dts:\tDisplay Trip Stops");
         System.out.println("dw:\tDisplay Weekly Schedule for Driver");
         System.out.println("ad:\tAdd a Driver");
         System.out.println("ab:\tAdd a Bus");
@@ -73,50 +105,111 @@ public class Main
     }
 
     // Display Schedule
-    public void displaySchedule()
+    private static void displaySchedule(Connection connect, Statement statement)
     {
+        try 
+        {
+            ResultSet result = statement.executeQuery("select * from tripoffering");
 
+            while (result.next())
+            {
+                System.out.println(result.getInt(1));
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     // Edit Schedule
-    public void editSchedule()
+    private static void editSchedule()
     {
+        try
+        {
 
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 
     // Display stops
-    public void displayStops()
+    private static void displayStops()
     {
+        try
+        {
 
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 
     // DIsplay weekly schedule of given driver
-    public void displayDriver()
+    private static void displayDriver()
     {
+        try
+        {
 
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 
     // add driver
-    public void addDriver()
+    private static void addDriver()
     {
+        try
+        {
 
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 
     // Add bus
-    public void addBus()
+    private static void addBus()
     {
+        try
+        {
 
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 
     // Delete bus
-    public void deleteBus()
+    private static void deleteBus()
     {
+        try
+        {
 
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 
     // Record data from trip
-    public void insertData()
+    private static void insertData()
     {
+        try
+        {
 
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 }
