@@ -8,10 +8,10 @@
     // DONE 1. Display the schedule of all trips for a given StartLocationName and Destination Name, and Date. 
         // In addition to these attributes, the schedule includes: Scheduled StartTime, ScheduledArrivalTime , DriverID, and BusID.
     // 2. Edit the schedule i.e. edit the table of Trip Offering as follows:
-        // -Delete a trip offering specified by Trip#, Date, and ScheduledStartTime;
-        // -Add a set of trip offerings assuming the values of all attributes are given (the software asks if you have more trips to enter) ;
-        // - Change the driver for a given Trip offering (i.e given TripNumber, Date, ScheduledStartTime);
-        // - Change the bus for a given Trip offering
+        // DONE - Delete a trip offering specified by Trip#, Date, and ScheduledStartTime;
+        // DONE - Add a set of trip offerings assuming the values of all attributes are given (the software asks if you have more trips to enter) ;
+        // DONE - Change the driver for a given Trip offering (i.e given TripNumber, Date, ScheduledStartTime);
+        // DONE - Change the bus for a given Trip offering
     // DONE 3. Display the stops of a given trip ( i.e. the attributes of the table TripStopInfo).
     // DONE 4. Display the weekly schedule of a given driver and date.
     // DONE 5. Add a drive.
@@ -57,20 +57,41 @@ public class Main
                     // Delete Trip offering
                     case "dt":
                         System.out.print("Insert Trip Number to Delete: ");
-                        int tripNum = kb.nextInt();
-                        deleteTrip(connect, statement, tripNum);
+                        int delTripNum = kb.nextInt();
+                        deleteTrip(connect, statement, delTripNum);
                         break;
                     // Add Trip Offering
                     case "at":
-                        addTrip(connect, statement);
+                        System.out.print("Insert Trip Number: ");
+                        int addTripNum = kb.nextInt();
+                        kb.nextLine();
+                        System.out.print("Insert Date of Trip: ");
+                        String addTripDate = kb.nextLine();
+                        System.out.print("Insert Start Time of Trip: ");
+                        String addTripStart = kb.nextLine();
+                        System.out.print("Insert Arrival Time of Trip: ");
+                        String addTripArrival = kb.nextLine();
+                        System.out.print("Insert Driver of Trip: ");
+                        String addTripDriver = kb.nextLine();
+                        System.out.print("Insert Bus: ");
+                        int addTripBus = kb.nextInt();
+                        addTrip(connect, statement, addTripNum, addTripDate, addTripStart, addTripArrival, addTripDriver, addTripBus);
                         break;
                     // Change Driver
                     case "cd":
-                        changeDriver(connect, statement);
+                        System.out.print("Insert New Driver: ");
+                        String changeDriver = kb.nextLine();
+                        System.out.print("Insert Trip to Change: ");
+                        int tripChangeDriver = kb.nextInt();
+                        changeDriver(connect, statement, changeDriver, tripChangeDriver);
                         break;
                     // Change bus
                     case "cb":
-                        changeBus(connect, statement);
+                        System.out.print("Insert New Bus: ");
+                        int changeBus = kb.nextInt();
+                        System.out.print("Insert Trip to Change: ");
+                        int tripChangeBus = kb.nextInt();
+                        changeBus(connect, statement, changeBus, tripChangeBus);
                         break;
                     // Display Trip Stops
                     case "dts":
@@ -166,11 +187,13 @@ public class Main
         }
     }
 
+    // Deletes a trip offering
     private static void deleteTrip(Connection connect, Statement statement, int tripNum)
     {
         try
         {
-
+            String update = String.format("DELETE FROM tripoffering WHERE (TripNumber = '%d')", tripNum);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
@@ -178,11 +201,13 @@ public class Main
         }
     }
 
-    private static void addTrip(Connection connect, Statement statement)
+    // Adds a trip offering
+    private static void addTrip(Connection connect, Statement statement, int addTripNum, String addTripDate, String addTripStart, String addTripArrival, String addTripDriver, int addTripBus)
     {
         try
         {
-
+            String update = String.format("INSERT INTO tripoffering(TripNumber, Date, ScheduledStartTime, ScheduledArrivalTime, DriverName, BusID) VALUES ('%d', '%s', '%s', '%s', '%s', '%d')", addTripNum, addTripDate, addTripStart, addTripArrival, addTripDriver, addTripBus);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
@@ -190,11 +215,13 @@ public class Main
         }
     }
 
-    private static void changeDriver(Connection connect, Statement statement)
+    // Changes driver from trip offering
+    private static void changeDriver(Connection connect, Statement statement, String newDriver, int tripNum)
     {
         try
         {
-
+            String update = String.format("UPDATE tripoffering SET DriverName = '%s' WHERE (TripNumber = '%d')", newDriver, tripNum);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
@@ -202,11 +229,13 @@ public class Main
         }
     }
 
-    private static void changeBus(Connection connect, Statement statement)
+    // Changes bus from trip offering
+    private static void changeBus(Connection connect, Statement statement, int newBus, int tripNum)
     {
         try
         {
-
+            String update = String.format("UPDATE tripoffering SET BusID = '%d' WHERE (TripNumber = '%d')", newBus, tripNum);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
