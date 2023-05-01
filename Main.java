@@ -348,7 +348,7 @@ public class Main
             ResultSet resultOffering = statement.executeQuery(String.format("select * from tripoffering where TripNumber = '%d'", tripNum));
             ResultSet resultStop = statement.executeQuery(String.format("select * from tripstopinfo where TripNumber = '%d'", tripNum));
 
-            String update = String.format("INSERT INTO actualtripstopinfo(TripNumber, ScheduleStartTime, StopNumber, ScheduledArrivalTime, ActualStartTime, ActualArrivalTime, NumOfPassengerIn, NumOfPassengerOut) VALUES ('%d', %s, %d, %s, %s, %s, %d, %d)", 
+            String update = String.format("INSERT INTO actualtripstopinfo(TripNumber, ScheduledStartTime, StopNumber, ScheduledArrivalTime, ActualStartTime, ActualArrivalTime, NumOfPassengerIn, NumOfPassengerOut) VALUES ('%d', %s, %d, %s, %s, %s, %d, %d)", 
                                             tripNum, resultOffering.getString("ScheduledStartTime"), resultStop.getString("StopNumber"), resultOffering.getString("ScheduledArrivalTime"), actualStart, actualArrival, passengerIn, passengerOut);
             statement.executeUpdate(update);
         }
