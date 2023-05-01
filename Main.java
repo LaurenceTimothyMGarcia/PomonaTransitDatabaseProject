@@ -207,6 +207,8 @@ public class Main
         {
             String update = String.format("DELETE FROM tripoffering WHERE (TripNumber = '%d')", tripNum);
             statement.executeUpdate(update);
+
+            displaySchedule(connect, statement);
         }
         catch(Exception e)
         {
@@ -221,6 +223,8 @@ public class Main
         {
             String update = String.format("INSERT INTO tripoffering(TripNumber, Date, ScheduledStartTime, ScheduledArrivalTime, DriverName, BusID) VALUES ('%d', '%s', '%s', '%s', '%s', '%d')", addTripNum, addTripDate, addTripStart, addTripArrival, addTripDriver, addTripBus);
             statement.executeUpdate(update);
+
+            displaySchedule(connect, statement);
         }
         catch(Exception e)
         {
@@ -235,6 +239,8 @@ public class Main
         {
             String update = String.format("UPDATE tripoffering SET DriverName = '%s' WHERE (TripNumber = '%d')", newDriver, tripNum);
             statement.executeUpdate(update);
+
+            displaySchedule(connect, statement);
         }
         catch(Exception e)
         {
@@ -249,6 +255,8 @@ public class Main
         {
             String update = String.format("UPDATE tripoffering SET BusID = '%d' WHERE (TripNumber = '%d')", newBus, tripNum);
             statement.executeUpdate(update);
+
+            displaySchedule(connect, statement);
         }
         catch(Exception e)
         {
@@ -305,6 +313,8 @@ public class Main
         {
             String update = String.format("INSERT INTO driver(DriverName, DriverTelephoneNumber) VALUES ('%s', '%s')", name, num);
             statement.executeUpdate(update);
+
+            displayDriver(connect, statement);
         }
         catch(Exception e)
         {
