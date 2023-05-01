@@ -128,7 +128,20 @@ public class Main
                         break;
                     // Insert actual trip info
                     case "it":
-                        insertData(connect, statement);
+                        System.out.print("Insert Trip Number: ");
+                        int actualTripNum = kb.nextInt();
+                        kb.nextLine();
+                        System.out.print("Insert Actual Start Time: ");
+                        String actualStartTime = kb.nextLine();
+                        System.out.print("Insert Actual Arrival Time: ");
+                        String actualArrivalTime = kb.nextLine();
+                        System.out.print("How many passengers entered: ");
+                        int passengerEnter = kb.nextInt();
+                        kb.nextLine();
+                        System.out.print("How many passengers exited: ");
+                        int passengerExit = kb.nextInt();
+                        kb.nextLine();
+                        insertData(connect, statement, actualTripNum, actualStartTime, actualArrivalTime, passengerEnter, passengerExit);
                         break;
                     // Display all commands
                     case "h":
@@ -328,11 +341,16 @@ public class Main
     }
 
     // Record data from trip
-    private static void insertData(Connection connect, Statement statement)
+    private static void insertData(Connection connect, Statement statement, int tripNum, String actualStart, String actualArrival, int passengerIn, int passengerOut)
     {
         try
         {
+            ResultSet resultOffering = statement.executeQuery(String.format("select * from tripoffering where TripNumber = '%d'", tripNum));
+            ResultSet resultStop = statement.executeQuery(String.format("select * from tripstopinfo where TripNumber = '%d'", tripNum));
 
+            String update = String.format("INSERT INTO actualtripstopinfo(TripNumber, ScheduleStartTime, StopNumber, ScheduledArrivalTime, ActualStartTime, ActualArrivalTime, NumOfPassengerIn, NumOfPassengerOut) VALUES ('%d', %s, %d, %s, %s, %s, %d, %d)", 
+                                            tripNum, resultOffering.getString("ScheduledStartTime"), resultStop.getString("StopNumber"), resultOffering.getString("ScheduledArrivalTime"), actualStart, actualArrival, passengerIn, passengerOut);
+            statement.executeUpdate(update);
         }
         catch(Exception e)
         {
