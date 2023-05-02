@@ -356,10 +356,31 @@ public class Main
         try
         {
             ResultSet resultOffering = statement.executeQuery(String.format("select * from tripoffering where TripNumber = '%d'", tripNum));
-            ResultSet resultStop = statement.executeQuery(String.format("select * from tripstopinfo where TripNumber = '%d'", tripNum));
+            String startTime, arrivalTime;
+            
+            if(resultOffering.next())
+            {
+                startTime = resultOffering.getString("ScheduledStartTime");
+                arrivalTime = resultOffering.getString("ScheduledArrivalTime");
+            }
+            else
+            {
+                startTime = null;
+                arrivalTime = null;
+            }
+            
 
-            String update = String.format("INSERT INTO actualtripstopinfo(TripNumber, ScheduledStartTime, StopNumber, ScheduledArrivalTime, ActualStartTime, ActualArrivalTime, NumOfPassengerIn, NumOfPassengerOut) VALUES ('%d', %s, %d, %s, %s, %s, %d, %d)", 
-                                            tripNum, resultOffering.getString("ScheduledStartTime"), resultStop.getString("StopNumber"), resultOffering.getString("ScheduledArrivalTime"), actualStart, actualArrival, passengerIn, passengerOut);
+            Statement statement2 = connect.createStatement();
+            ResultSet resultStop = statement2.executeQuery(String.format("select * from tripstopinfo where TripNumber = '%d'", tripNum));
+
+            int stopNum = 0;
+            if (resultStop.next())
+            {
+                stopNum = resultStop.getInt("StopNumber");
+            }
+
+            String update = String.format("INSERT INTO actualtripstopinfo(TripNumber, ScheduledStartTime, StopNumber, ScheduledArrivalTime, ActualStartTime, ActualArrivalTime, NumOfPassengerIn, NumOfPassengerOut) VALUES ('%d', '%s', '%d', '%s', '%s', '%s', '%d', '%d')", 
+                                            tripNum, startTime, stopNum, arrivalTime, actualStart, actualArrival, passengerIn, passengerOut);
             statement.executeUpdate(update);
         }
         catch(Exception e)
