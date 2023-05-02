@@ -269,14 +269,14 @@ public class Main
     {
         try
         {
-            ResultSet result = statement.executeQuery("select * from stop");
+            ResultSet result = statement.executeQuery("select * from tripstopinfo");
 
-            System.out.printf("| %-11s | %-12s |\n","Stop Number", "Stop Address");
+            System.out.printf("| %-11s | %-11s | %-12s | %-12s |\n","Trip Number", "Stop Number", "Sequence Num", "Driving Time");
             System.out.printf("--------------------------------%n");
 
             while (result.next())
             {
-                System.out.printf("| %03d | %-20s |\n", result.getInt(1), result.getString(2));
+                System.out.printf("| %03d | %03d | %04d | %-5s |\n", result.getInt(1), result.getInt(2), result.getInt(3), result.getString(4));
             }
         }
         catch(Exception e)
