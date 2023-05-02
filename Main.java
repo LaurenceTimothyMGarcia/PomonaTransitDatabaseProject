@@ -382,6 +382,8 @@ public class Main
             String update = String.format("INSERT INTO actualtripstopinfo(TripNumber, ScheduledStartTime, StopNumber, ScheduledArrivalTime, ActualStartTime, ActualArrivalTime, NumOfPassengerIn, NumOfPassengerOut) VALUES ('%d', '%s', '%d', '%s', '%s', '%s', '%d', '%d')", 
                                             tripNum, startTime, stopNum, arrivalTime, actualStart, actualArrival, passengerIn, passengerOut);
             statement.executeUpdate(update);
+
+            System.out.println("Inserted Trip Data");
         }
         catch(Exception e)
         {
